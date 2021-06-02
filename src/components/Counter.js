@@ -2,7 +2,8 @@ import classes from "./Counter.module.css";
 
 // use `useSelector` to select only part of the states needed from the data store
 import { useSelector, useDispatch } from "react-redux";
-import { counterActions } from "../store/index";
+// import { counterActions } from "../store/index";
+import { counterActions } from "../store/counter";
 
 const Counter = () => {
   // *** IMPORTANT ***
