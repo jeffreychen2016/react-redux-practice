@@ -1,13 +1,14 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const initialState = { counter: 0, showCounter: true };
+const initialCounterState = { counter: 0, showCounter: true };
+const initialAuthState = { isAuthenticated: false };
 
 // --------------------------
 // METHOD 2: use redux toolkit
 // --------------------------
 const counterSlice = createSlice({
   name: "counter",
-  initialState: initialState,
+  initialState: initialCounterState,
   reducers: {
     increment(state) {
       // *** IMPORTANT ***
@@ -27,8 +28,23 @@ const counterSlice = createSlice({
   },
 });
 
+const authSlice = createSlice({
+  name: "authentication",
+  initialState: initialAuthState,
+  reducers: {
+    login(state) {
+      state.isAuthenticated = true;
+    },
+    logout(state) {
+      state.isAuthenticated = false;
+    },
+  },
+});
+
 // configureStore allows you to pass in multiple reducers
-const store = configureStore({ reducer: counterSlice.reducer });
+const store = configureStore({
+  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
+});
 
 // `counterActions` will hold all functions we defined in the slice
 // instead of calling `dispatch({type: ''})` with specific identifier,
@@ -36,6 +52,7 @@ const store = configureStore({ reducer: counterSlice.reducer });
 // with this, we do not need IF checks anymore, since to method we are calling are tied
 // to the method defined in the slice
 export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions;
 export default store;
 
 // --------------------------

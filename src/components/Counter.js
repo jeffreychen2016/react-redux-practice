@@ -9,8 +9,14 @@ const Counter = () => {
   // select only `counter` state from the data store
   // when use `useSelector`, it will automatically subscribe the component
   // to the data store
-  const counter = useSelector((state) => state.counter);
-  const showCounter = useSelector((state) => state.showCounter);
+
+  // the first counter here is the name specified in
+  // const store = configureStore({
+  //   reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
+  // });
+  // the second counter is the state
+  const counter = useSelector((state) => state.counter.counter);
+  const showCounter = useSelector((state) => state.counter.showCounter);
   const dispatch = useDispatch();
 
   // handlers
